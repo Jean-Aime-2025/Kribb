@@ -54,9 +54,9 @@ export default function SavedScreen() {
     <SafeAreaView className="flex-1 bg-gray-50">
       {/* Header */}
       <View className="px-5 pt-4 pb-3">
-        <Text className="text-2xl font-bold text-gray-900">Saved</Text>
+        <Text className="text-2xl font-sans-bold text-gray-900">Saved</Text>
         {!loading && (
-          <Text className="text-sm text-gray-400 mt-1">
+          <Text className="text-sm text-gray-400 mt-1 font-sans-medium">
             {saved.length} {saved.length === 1 ? "property" : "properties"}{" "}
             saved
           </Text>
@@ -87,17 +87,17 @@ export default function SavedScreen() {
               <View className="w-20 h-20 bg-red-50 rounded-full items-center justify-center mb-4">
                 <Ionicons name="heart-outline" size={36} color="#EF4444" />
               </View>
-              <Text className="text-gray-700 text-lg font-bold mb-1">
+              <Text className="text-gray-700 text-lg font-sans-bold mb-1">
                 No saved properties
               </Text>
-              <Text className="text-gray-400 text-sm text-center px-8">
+              <Text className="text-gray-400 text-sm text-center px-8 font-sans-medium">
                 Tap the heart icon on any property to save it here
               </Text>
               <TouchableOpacity
                 onPress={() => router.push("/(root)/(tabs)/search")}
                 className="mt-6 bg-blue-600 px-6 py-3 rounded-2xl"
               >
-                <Text className="text-white font-semibold">
+                <Text className="text-white font-sans-semibold">
                   Browse Properties
                 </Text>
               </TouchableOpacity>

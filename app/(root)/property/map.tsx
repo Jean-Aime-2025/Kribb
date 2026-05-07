@@ -35,12 +35,12 @@ export default function MapScreen() {
 
         <View className="flex-1 mx-3">
           <Text
-            className="text-gray-900 font-semibold text-sm"
+            className="text-gray-900 font-sans-semibold text-sm"
             numberOfLines={1}
           >
             {title}
           </Text>
-          <Text className="text-gray-400 text-xs" numberOfLines={1}>
+          <Text className="text-gray-400 text-xs font-sans-medium" numberOfLines={1}>
             {address}
           </Text>
         </View>
@@ -52,7 +52,7 @@ export default function MapScreen() {
           className="flex-row items-center gap-1 bg-blue-50 px-3 py-2 rounded-full"
         >
           <Ionicons name="navigate-outline" size={14} color="#2563EB" />
-          <Text className="text-blue-600 text-xs font-semibold">
+          <Text className="text-blue-600 text-xs font-sans-semibold">
             Google Maps
           </Text>
         </TouchableOpacity>

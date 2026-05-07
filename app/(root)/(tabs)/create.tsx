@@ -25,8 +25,8 @@ const MIN_PRICE = 1;
 const MAX_PRICE = 999_999_999;
 
 const inputClass =
-  "bg-white border border-gray-200 rounded-2xl px-4 py-3 text-gray-800";
-const labelClass = "text-sm font-semibold text-gray-700 mb-1.5";
+  "bg-white border border-gray-200 rounded-2xl px-4 py-3 text-gray-800 font-sans-medium";
+const labelClass = "text-sm font-sans-semibold text-gray-700 mb-1.5";
 const sectionClass = "mb-5";
 
 interface FormState {
@@ -252,7 +252,7 @@ export default function CreatePropertyScreen() {
         >
           <Ionicons name="remove" size={18} color="#374151" />
         </TouchableOpacity>
-        <Text className="flex-1 text-center text-gray-800 font-bold text-base">
+        <Text className="flex-1 text-center text-gray-800 font-sans-bold text-base">
           {value}
         </Text>
         <TouchableOpacity
@@ -291,7 +291,7 @@ export default function CreatePropertyScreen() {
           {label}
         </Text>
         {description && (
-          <Text className="text-xs text-gray-400 mt-0.5">{description}</Text>
+          <Text className="text-xs text-gray-400 mt-0.5 font-sans-medium">{description}</Text>
         )}
       </View>
       <View
@@ -312,7 +312,7 @@ export default function CreatePropertyScreen() {
       >
         {/* Header */}
         <View className="flex-row items-center px-5 pt-4 pb-3">
-          <Text className="text-2xl font-bold text-gray-900 flex-1">
+          <Text className="text-2xl font-sans-bold text-gray-900 flex-1">
             Add Property
           </Text>
         </View>
@@ -326,7 +326,7 @@ export default function CreatePropertyScreen() {
           <View className={sectionClass}>
             <Text className={labelClass}>
               Photos{" "}
-              <Text className="text-gray-400 font-normal">(up to 6)</Text>
+              <Text className="text-gray-400 font-sans-medium">(up to 6)</Text>
             </Text>
 
             <View className="flex-row flex-wrap gap-3">
@@ -339,7 +339,7 @@ export default function CreatePropertyScreen() {
                   />
                   {index === 0 && (
                     <View className="absolute top-1 left-1 bg-blue-600 px-1.5 py-0.5 rounded-full">
-                      <Text className="text-white text-[9px] font-bold">
+                      <Text className="text-white text-[9px] font-sans-bold">
                         COVER
                       </Text>
                     </View>
@@ -368,7 +368,7 @@ export default function CreatePropertyScreen() {
                         size={22}
                         color="#9CA3AF"
                       />
-                      <Text className="text-gray-400 text-xs mt-1">Add</Text>
+                      <Text className="text-gray-400 text-xs mt-1 font-sans-medium">Add</Text>
                     </>
                   )}
                 </TouchableOpacity>
@@ -506,7 +506,7 @@ export default function CreatePropertyScreen() {
                 ) : (
                   <Ionicons name="locate-outline" size={13} color="#2563EB" />
                 )}
-                <Text className="text-blue-600 text-xs font-semibold">
+                <Text className="text-blue-600 text-xs font-sans-semibold">
                   {detectingLocation ? "Detecting..." : "Detect Location"}
                 </Text>
               </TouchableOpacity>
@@ -563,7 +563,7 @@ export default function CreatePropertyScreen() {
             {submitting ? (
               <ActivityIndicator color="white" />
             ) : (
-              <Text className="text-white font-bold text-base">
+              <Text className="text-white font-sans-bold text-base">
                 List Property
               </Text>
             )}

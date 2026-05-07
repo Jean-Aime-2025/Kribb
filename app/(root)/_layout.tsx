@@ -9,7 +9,7 @@ export default function RootLayout() {
   useUserSync()
 
   if (!isLoaded) return null;
-  if (!isSignedIn) return <Redirect href="/sign-in" />;
+  if (!isSignedIn) return <Redirect href="/splash" />;
 
   return <Slot />;
 }

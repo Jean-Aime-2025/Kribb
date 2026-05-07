@@ -62,8 +62,8 @@ export default function HomeScreen() {
             resizeMode="contain"
           />
           <View className="items-end">
-            <Text className="text-gray-500 text-base">Good morning 👋</Text>
-            <Text className="text-gray-900 text-base font-bold">
+            <Text className="text-gray-500 text-base font-sans-medium">Good morning 👋</Text>
+            <Text className="text-gray-900 text-base font-sans-bold">
               {user?.firstName ?? 'User'}
             </Text>
           </View>
@@ -81,7 +81,7 @@ export default function HomeScreen() {
           }}
         >
           <Ionicons name="search-outline" size={18} color="#9CA3AF" />
-          <Text className="text-gray-400 text-sm flex-1">
+          <Text className="text-gray-400 font-sans-medium flex-1">
             Search properties, cities...
           </Text>
           <TouchableOpacity
@@ -104,7 +104,7 @@ export default function HomeScreen() {
             <View>
               {/* Featured Section */}
               <View className="mb-6">
-                <Text className="text-gray-900 text-lg font-bold px-5 mb-2">
+                <Text className="text-gray-900 text-lg font-sans-bold px-5 mb-2">
                   Featured
                 </Text>
 
@@ -126,7 +126,7 @@ export default function HomeScreen() {
                 )}
               </View>
               {/* Recommended Header */}
-              <Text className="text-gray-900 text-lg font-bold px-5 mb-4">
+              <Text className="text-gray-900 text-lg font-sans-bold px-5 mb-4">
                 Recommended
               </Text>
             </View>
@@ -139,7 +139,7 @@ export default function HomeScreen() {
           ListEmptyComponent={
             !loading ? (
               <View className="items-center py-10">
-                <Text className="text-gray-400">No properties found</Text>
+                <Text className="text-gray-400 font-sans-medium">No properties found</Text>
               </View>
             ) : null
           }

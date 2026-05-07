@@ -1,26 +1,23 @@
-import { useAuth, useSignUp } from "@clerk/expo";
-import { Link, useRouter } from "expo-router";
-import { useState } from "react";
-import {
-  ActivityIndicator,
-  Image,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import Button from '@/components/Button';
+import Input from '@/components/Input';
+import OTPInput from '@/components/OTPInput';
+import { useAuth, useSignUp } from '@clerk/expo';
+import { Link, useRouter } from 'expo-router';
+import { useState } from 'react';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 export default function SignUpScreen() {
   const { signUp, errors, fetchStatus } = useSignUp();
   const { isSignedIn } = useAuth();
   const router = useRouter();
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [code, setCode] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [code, setCode] = useState('');
+
+  const isLoading = fetchStatus === 'fetching';
 
   const onSignUpPress = async () => {
     const { error } = await signUp.password({
@@ -41,170 +38,179 @@ export default function SignUpScreen() {
       code,
     });
 
-    if (signUp.status === "complete") {
+    if (signUp.status === 'complete') {
       await signUp.finalize({
         navigate: ({ session, decorateUrl }) => {
           if (session?.currentTask) {
             console.log(session?.currentTask);
             return;
           }
-          const url = decorateUrl("/");
+          const url = decorateUrl('/');
           router.replace(url as any);
         },
       });
     } else {
-      console.error("Sign-up attempt not complete:", signUp);
+      console.error('Sign-up attempt not complete:', signUp);
     }
   };
 
-  const isLoading = fetchStatus === "fetching";
+  if (signUp.status === 'complete' || isSignedIn) return null;
 
-  if (signUp.status === "complete" || isSignedIn) {
-    return null;
-  }
-
-  // OTP verification screen
+  // OTP SCREEN
   if (
-    signUp.status === "missing_requirements" &&
-    signUp.unverifiedFields.includes("email_address") &&
-    signUp.missingFields.length === 0
+    signUp.status === 'missing_requirements' &&
+    signUp.unverifiedFields.includes('email_address')
   ) {
     return (
-      <View className="flex-1 justify-center items-center bg-white px-6">
+      <View className="flex-1 bg-white px-6 justify-center">
         <Image
-          source={require("../../assets/images/kribb.png")}
-          className="w-32 h-16 mb-8"
+          source={require('../../assets/images/kribb.png')}
+          className="w-32 h-14 mb-8"
           resizeMode="contain"
         />
-        <Text className="text-2xl font-bold text-gray-800 mb-2">
+
+        <Text className="text-3xl font-sans-bold text-black mb-2">
           Verify your account
         </Text>
-        <Text className="text-gray-500 mb-8 text-center">
-          We sent a code to {email}
+
+        <Text className="text-neutral-500 mb-6 font-sans-medium">
+          Enter the code sent to {email}
         </Text>
 
-        <TextInput
-          className="w-full border border-gray-300 rounded-xl px-4 py-3 mb-4"
-          placeholder="Enter verification code"
-          placeholderTextColor="#9CA3AF"
-          keyboardType="number-pad"
-          value={code}
-          onChangeText={setCode}
-        />
+        <OTPInput value={code} onChange={setCode} />
+
         {errors.fields.code && (
-          <Text className="text-red-500 mb-4">
+          <Text className="text-red-500 mt-4 font-sans-medium text-center">
             {errors.fields.code.message}
           </Text>
         )}
 
-        <TouchableOpacity
-          onPress={onVerifyPress}
-          disabled={isLoading}
-          className="w-full bg-blue-600 py-4 rounded-xl items-center mb-4"
-        >
-          {isLoading ? (
-            <ActivityIndicator color="white" />
-          ) : (
-            <Text className="text-white font-bold text-base">Verify</Text>
-          )}
-        </TouchableOpacity>
+        <View className="mt-8">
+          <Button
+            title="Verify Account"
+            onPress={onVerifyPress}
+            loading={isLoading}
+          />
+        </View>
 
         <TouchableOpacity
+          className="mt-6 border border-primary py-4 rounded-xl bg-primary/5"
           onPress={() => signUp.verifications.sendEmailCode()}
-          className="py-2"
         >
-          <Text className="text-blue-600">I need a new code</Text>
+          <Text className="text-primary text-center font-sans-medium">
+            Resend code
+          </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => signUp.reset()} className="py-2">
-          <Text className="text-blue-600">Start over</Text>
+        <TouchableOpacity
+          className="mt-6 border border-neutral-500 py-4 rounded-xl"
+          onPress={() => {
+            signUp.reset();
+            router.push('/(auth)/sign-up');
+          }}
+        >
+          <Text className="text-neutral-500 text-center font-sans-medium">
+            Start over
+          </Text>
         </TouchableOpacity>
       </View>
     );
   }
 
-  // Sign up form
+  // SIGN UP FORM
   return (
     <ScrollView
+      className="flex-1 bg-white"
       contentContainerStyle={{ flexGrow: 1 }}
-      className="bg-white"
       keyboardShouldPersistTaps="handled"
     >
       <View className="flex-1 justify-center px-6 py-12">
+        {/* Logo */}
         <Image
-          source={require("../../assets/images/kribb.png")}
+          source={require('../../assets/images/kribb.png')}
           className="w-36 h-16 mb-8"
           resizeMode="contain"
         />
-        <Text className="text-3xl font-bold text-gray-800 mb-2">
+
+        {/* Heading */}
+        <Text className="text-4xl font-sans-extrabold text-black mb-2">
           Create account
         </Text>
-        <Text className="text-gray-500 mb-8">Find your dream home today</Text>
 
-        <View className="flex-row gap-3 mb-4">
-          <TextInput
-            className="flex-1 border border-gray-300 rounded-xl px-4 py-3"
-            placeholder="First name"
-            placeholderTextColor="#9CA3AF"
-            value={firstName}
-            onChangeText={setFirstName}
-            autoCapitalize="words"
-          />
-          <TextInput
-            className="flex-1 border border-gray-300 rounded-xl px-4 py-3"
-            placeholder="Last name"
-            placeholderTextColor="#9CA3AF"
-            value={lastName}
-            onChangeText={setLastName}
-            autoCapitalize="words"
-          />
+        <Text className="text-neutral-500 mb-10 font-sans-medium">
+          Find your dream home today
+        </Text>
+
+        {/* Name row */}
+        <View className="flex-row gap-3">
+          <View className="flex-1">
+            <Input
+              placeholder="First name"
+              value={firstName}
+              onChangeText={setFirstName}
+            />
+          </View>
+
+          <View className="flex-1">
+            <Input
+              placeholder="Last name"
+              value={lastName}
+              onChangeText={setLastName}
+            />
+          </View>
         </View>
 
-        <TextInput
-          className="w-full border border-gray-300 rounded-xl px-4 py-3 mb-4"
+        {errors.fields.firstName && (
+          <Text className="text-red-500 mt-2 font-sans-medium">
+            {errors.fields.firstName.message}
+          </Text>
+        )}
+
+        {/* Email */}
+        <Input
           placeholder="Email address"
-          placeholderTextColor="#9CA3AF"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
-          autoCapitalize="none"
         />
+
         {errors.fields.emailAddress && (
-          <Text className="text-red-500 mb-4">
+          <Text className="text-red-500 mb-3 font-sans-medium">
             {errors.fields.emailAddress.message}
           </Text>
         )}
 
-        <TextInput
-          className="w-full border border-gray-300 rounded-xl px-4 py-3 mb-6"
+        {/* Password */}
+        <Input
           placeholder="Password"
-          placeholderTextColor="#9CA3AF"
           value={password}
           onChangeText={setPassword}
           secureTextEntry
         />
+
         {errors.fields.password && (
-          <Text className="text-red-500 mb-4">
+          <Text className="text-red-500 mb-3 font-sans-medium">
             {errors.fields.password.message}
           </Text>
         )}
 
-        <TouchableOpacity
-          onPress={onSignUpPress}
-          disabled={isLoading}
-          className="w-full bg-blue-600 py-4 rounded-xl items-center mb-4"
-        >
-          {isLoading ? (
-            <ActivityIndicator color="white" />
-          ) : (
-            <Text className="text-white font-bold text-base">Sign Up</Text>
-          )}
-        </TouchableOpacity>
+        {/* Button */}
+        <View className="mt-4">
+          <Button
+            title="Create Account"
+            onPress={onSignUpPress}
+            loading={isLoading}
+          />
+        </View>
 
-        <View className="flex-row justify-center">
-          <Text className="text-gray-500">Already have an account? </Text>
+        {/* Footer */}
+        <View className="flex-row justify-center mt-8">
+          <Text className="text-neutral-500 font-sans-medium">
+            Already have an account?{' '}
+          </Text>
+
           <Link href="/sign-in">
-            <Text className="text-blue-600 font-semibold">Sign In</Text>
+            <Text className="text-primary font-sans-semibold">Sign In</Text>
           </Link>
         </View>
 

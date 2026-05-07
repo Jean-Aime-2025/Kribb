@@ -5,14 +5,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#0E4D92",
-        accent: "#F59E0B",
-        card: "#1A1A2E",
+        primary: "#155dfc"
       },
-      fontFamily: {
-        sans: ["Rubik_400Regular"],
-        medium: ["Rubik_500Medium"],
-        bold: ["Rubik_700Bold"],
+       fontFamily: {
+        sans: ["sans-reguslar"],
+        "sans-medium": ["sans-medium"],
+        "sans-semibold": ["sans-semibold"],
+        "sans-bold": ["sans-bold"],
+        "sans-extrabold": ["sans-extrabold"],
+        "sans-light": ["sans-light"],
       },
     },
   },

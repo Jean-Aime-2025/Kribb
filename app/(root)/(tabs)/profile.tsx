@@ -23,7 +23,7 @@ export default function ProfileScreen() {
   const handleSignOut = async () => {
     try {
       await signOut();
-      router.replace('/sign-in');
+      router.replace('/splash');
     } catch (error) {
       console.error('Error signing out:', error);
     }
@@ -104,10 +104,10 @@ export default function ProfileScreen() {
             )}
           </TouchableOpacity>
         </View>
-        <Text className="text-xl font-bold text-gray-800">
+        <Text className="text-xl font-sans-bold text-gray-800">
           {user.firstName} {user.lastName}
         </Text>
-        <Text className="text-gray-500 mt-1">
+        <Text className="text-gray-500 mt-1 font-sans-medium">
           {user.emailAddresses[0].emailAddress}
         </Text>
       </View>
@@ -149,7 +149,7 @@ export default function ProfileScreen() {
           className="flex-row items-center justify-center gap-2 bg-red-50 py-4 rounded-2xl border border-red-100"
         >
           <Ionicons name="log-out-outline" size={20} color="#EF4444" />
-          <Text className="text-red-500 font-semibold text-base">Sign Out</Text>
+          <Text className="text-red-500 font-sans-semibold text-base">Sign Out</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -171,7 +171,7 @@ function MenuItem({
       className="flex-row items-center gap-4 bg-gray-50 px-4 py-4 rounded-2xl"
     >
       <Ionicons name={icon} size={22} color="#6B7280" />
-      <Text className="flex-1 text-gray-700 font-medium text-base">
+      <Text className="flex-1 text-gray-700 font-sans-medium text-base">
         {label}
       </Text>
       <Ionicons name="chevron-forward" size={18} color="#D1D5DB" />

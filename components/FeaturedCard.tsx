@@ -33,21 +33,21 @@ export default function FeaturedCard({ property }: { property: Property }) {
 
       {/* Badge */}
       <View className="absolute top-3 left-3 bg-white/90 px-3 py-1 rounded-full">
-        <Text className="text-xs font-semibold text-blue-600 capitalize">
+        <Text className="text-xs font-sans-semibold text-blue-600 capitalize">
           {property.type}
         </Text>
       </View>
 
       {property.is_sold && (
         <View className="absolute top-3 right-3 bg-red-500 px-3 py-1 rounded-full">
-          <Text className="text-xs font-semibold text-white">Sold</Text>
+          <Text className="text-xs font-sans-semibold text-white">Sold</Text>
         </View>
       )}
 
       {/* Info */}
       <View className="p-4">
         <Text
-          className="text-base font-bold text-gray-800 mb-1"
+          className="text-base font-sans-bold text-gray-800 mb-1"
           numberOfLines={1}
         >
           {property.title}
@@ -55,23 +55,23 @@ export default function FeaturedCard({ property }: { property: Property }) {
 
         <View className="flex-row items-center gap-1 mb-3">
           <Ionicons name="location-outline" size={13} color="#6B7280" />
-          <Text className="text-xs text-gray-500" numberOfLines={1}>
+          <Text className="text-xs text-gray-500 font-sans-medium" numberOfLines={1}>
             {property.address}, {property.city}
           </Text>
         </View>
 
         <View className="flex-row items-center justify-between">
-          <Text className="text-blue-600 font-bold text-base">
+          <Text className="text-blue-600 font-sans-bold text-base">
             {formatPrice(property.price)}
           </Text>
           <View className="flex-row items-center gap-3">
             <View className="flex-row items-center gap-1">
               <Ionicons name="bed-outline" size={13} color="#6B7280" />
-              <Text className="text-xs text-gray-500">{property.bedrooms}</Text>
+              <Text className="text-xs text-gray-500 font-sans-medium">{property.bedrooms}</Text>
             </View>
             <View className="flex-row items-center gap-1">
               <Ionicons name="water-outline" size={13} color="#6B7280" />
-              <Text className="text-xs text-gray-500">
+              <Text className="text-xs text-gray-500 font-sans-medium">
                 {property.bathrooms}
               </Text>
             </View>

@@ -111,7 +111,7 @@ export default function PropertyDetailScreen() {
   if (!property) {
     return (
       <View className="flex-1 items-center justify-center bg-white">
-        <Text className="text-gray-500">Property not found</Text>
+        <Text className="text-gray-500 font-sans-medium">Property not found</Text>
       </View>
     );
   }
@@ -156,7 +156,7 @@ export default function PropertyDetailScreen() {
 
           {/* Image count badge */}
           <View className="absolute bottom-3 right-4 bg-black/50 px-3 py-1 rounded-full">
-            <Text className="text-white text-xs font-medium">
+            <Text className="text-white text-xs font-sans-medium">
               {activeIndex + 1}/{property.images.length}
             </Text>
           </View>
@@ -209,29 +209,29 @@ export default function PropertyDetailScreen() {
           {/* Badges */}
           <View className="flex-row gap-2 mb-3 flex-wrap">
             <View className="bg-blue-50 px-3 py-1 rounded-full">
-              <Text className="text-blue-600 text-xs font-semibold capitalize">
+              <Text className="text-blue-600 text-xs font-sans-semibold capitalize">
                 {property.type}
               </Text>
             </View>
             {property.is_featured && (
               <View className="bg-amber-50 px-3 py-1 rounded-full">
-                <Text className="text-amber-600 text-xs font-semibold">
+                <Text className="text-amber-600 text-xs font-sans-semibold">
                   ⭐ Featured
                 </Text>
               </View>
             )}
             {property.is_sold && (
               <View className="bg-red-50 px-3 py-1 rounded-full">
-                <Text className="text-red-500 text-xs font-semibold">Sold</Text>
+                <Text className="text-red-500 text-xs font-sans-semibold">Sold</Text>
               </View>
             )}
           </View>
 
           {/* Title + Price */}
-          <Text className="text-2xl font-bold text-gray-900 mb-1">
+          <Text className="text-2xl font-sans-bold text-gray-900 mb-1">
             {property.title}
           </Text>
-          <Text className="text-blue-600 text-xl font-bold mb-4">
+          <Text className="text-blue-600 text-xl font-sans-bold mb-4">
             {formatPrice(property.price)}
           </Text>
 
@@ -256,15 +256,15 @@ export default function PropertyDetailScreen() {
           </View>
 
           {/* Description */}
-          <Text className="text-base font-bold text-gray-900 mb-2">
+          <Text className="text-base font-sans-bold text-gray-900 mb-2">
             Description
           </Text>
-          <Text className="text-gray-500 text-sm leading-6 mb-1">
+          <Text className="text-gray-500 text-sm leading-6 mb-1 font-sans-medium">
             {displayDesc}
           </Text>
           {isLongDesc && (
             <TouchableOpacity onPress={() => setExpanded(!expanded)}>
-              <Text className="text-blue-600 text-sm font-medium mb-5">
+              <Text className="text-blue-600 text-sm font-sans-medium mb-5">
                 {expanded ? "Show less" : "Read more"}
               </Text>
             </TouchableOpacity>
@@ -273,12 +273,12 @@ export default function PropertyDetailScreen() {
           <View className="mb-5" />
 
           {/* Location */}
-          <Text className="text-base font-bold text-gray-900 mb-2">
+          <Text className="text-base font-sans-bold text-gray-900 mb-2">
             Location
           </Text>
           <View className="flex-row items-center gap-2 mb-4">
             <Ionicons name="location-outline" size={16} color="#6B7280" />
-            <Text className="text-gray-500 text-sm flex-1">
+            <Text className="text-gray-500 text-sm flex-1 font-sans-medium">
               {property.address}, {property.city}
             </Text>
           </View>
@@ -308,7 +308,7 @@ export default function PropertyDetailScreen() {
             />
             <View className="absolute bottom-3 right-3 bg-white/90 px-3 py-1 rounded-full flex-row items-center gap-1">
               <Ionicons name="expand-outline" size={12} color="#374151" />
-              <Text className="text-gray-600 text-xs font-medium">
+              <Text className="text-gray-600 text-xs font-sans-medium">
                 Tap to expand
               </Text>
             </View>
@@ -320,7 +320,7 @@ export default function PropertyDetailScreen() {
             className="flex-row items-center justify-center gap-2 bg-blue-600 py-4 rounded-2xl mb-4"
           >
             <Ionicons name="logo-whatsapp" size={20} color="white" />
-            <Text className="text-white font-bold text-base">
+            <Text className="text-white font-sans-bold text-base">
               Contact Agent
             </Text>
           </TouchableOpacity>
@@ -338,7 +338,7 @@ export default function PropertyDetailScreen() {
                     size={18}
                     color="#D97706"
                   />
-                  <Text className="text-amber-600 font-semibold">
+                  <Text className="text-amber-600 font-sans-semibold">
                     Mark Sold
                   </Text>
                 </TouchableOpacity>
@@ -348,7 +348,7 @@ export default function PropertyDetailScreen() {
                 className="flex-1 flex-row items-center justify-center gap-2 bg-red-50 py-4 rounded-2xl border border-red-100"
               >
                 <Ionicons name="trash-outline" size={18} color="#EF4444" />
-                <Text className="text-red-500 font-semibold">Delete</Text>
+                <Text className="text-red-500 font-sans-semibold">Delete</Text>
               </TouchableOpacity>
             </View>
           )}

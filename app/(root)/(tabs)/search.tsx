@@ -91,7 +91,7 @@ export default function SearchScreen() {
       <SafeAreaView className="bg-gray-50">
         {/* Header */}
         <View className="px-5 pt-4 pb-3">
-          <Text className="text-2xl font-bold text-gray-900 mb-4">
+          <Text className="text-2xl font-sans-bold text-gray-900 mb-4">
             Find Property
           </Text>
 
@@ -109,7 +109,7 @@ export default function SearchScreen() {
             >
               <Ionicons name="search-outline" size={18} color="#9CA3AF" />
               <TextInput
-                className="flex-1 py-3 text-gray-800"
+                className="flex-1 py-3 text-gray-800 font-sans-medium"
                 placeholder="Search by title or city..."
                 placeholderTextColor="#9CA3AF"
                 value={search}
@@ -144,7 +144,7 @@ export default function SearchScreen() {
               />
               {activeFilterCount > 0 && (
                 <View className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full items-center justify-center">
-                  <Text className="text-white text-[9px] font-bold">
+                  <Text className="text-white text-[9px] font-sans-bold">
                     {activeFilterCount}
                   </Text>
                 </View>
@@ -157,7 +157,7 @@ export default function SearchScreen() {
             <View className="flex-row flex-wrap gap-2 mt-3">
               {type && (
                 <View className="flex-row items-center bg-blue-50 border border-blue-200 rounded-full px-3 py-1 gap-1">
-                  <Text className="text-blue-700 text-xs font-semibold capitalize">
+                  <Text className="text-blue-700 text-xs font-sans-semibold capitalize">
                     {type}
                   </Text>
                   <TouchableOpacity onPress={() => setType(null)}>
@@ -168,7 +168,7 @@ export default function SearchScreen() {
               {bedrooms !== null && (
                 <View className="flex-row items-center bg-blue-50 border border-blue-200 rounded-full px-3 py-1 gap-1">
                   <Ionicons name="bed-outline" size={11} color="#1D4ED8" />
-                  <Text className="text-blue-700 text-xs font-semibold">
+                  <Text className="text-blue-700 text-xs font-sans-semibold">
                     {bedrooms === 4
                       ? "4+ beds"
                       : `${bedrooms} bed${bedrooms > 1 ? "s" : ""}`}
@@ -180,7 +180,7 @@ export default function SearchScreen() {
               )}
               {(minPrice !== null || maxPrice !== null) && (
                 <View className="flex-row items-center bg-blue-50 border border-blue-200 rounded-full px-3 py-1 gap-1">
-                  <Text className="text-blue-700 text-xs font-semibold">
+                  <Text className="text-blue-700 text-xs font-sans-semibold">
                     {minPrice && maxPrice
                       ? `${formatPrice(minPrice)} – ${formatPrice(maxPrice)}`
                       : minPrice
@@ -209,7 +209,7 @@ export default function SearchScreen() {
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => <PropertyCard property={item} showSave />}
           ListHeaderComponent={
-            <Text className="text-sm text-gray-400 mb-4">
+            <Text className="text-sm text-gray-400 mb-4 font-sans-medium">
               {loading ? "Searching..." : `${results.length} properties found`}
             </Text>
           }
@@ -217,10 +217,10 @@ export default function SearchScreen() {
             !loading ? (
               <View className="items-center py-20">
                 <Ionicons name="search-outline" size={48} color="#D1D5DB" />
-                <Text className="text-gray-400 mt-4 text-base">
+                <Text className="text-gray-400 mt-4 text-base font-sans-medium">
                   No properties found
                 </Text>
-                <Text className="text-gray-300 text-sm mt-1">
+                <Text className="text-gray-300 text-sm mt-1 font-sans-medium">
                   Try a different search or adjust filters
                 </Text>
               </View>
